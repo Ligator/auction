@@ -9,7 +9,15 @@ class Product < ApplicationRecord
       col_names.delete("image_url")
       csv << col_names
       all.each do |product|
-        csv << product.attributes.values_at(*col_names)
+        created_at = product.attributes["created_at"]
+        updated_at = product.attributes["updated_at"]
+        attributes =
+          product
+            .attributes
+            .merge("created_at"=>created_at.strftime("%d/%m/%Y - %H:%M"),
+                   "updated_at"=>updated_at.strftime("%d/%m/%Y - %H:%M")
+                  )
+        csv << attributes.values_at(*col_names)
       end
     end
   end
