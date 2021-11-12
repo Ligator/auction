@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'statics/coming'
   devise_for :users
   resources :products
   root "products#index"
