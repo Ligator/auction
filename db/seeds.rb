@@ -5,3 +5,40 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'faker'
+
+product_names = %w[
+  cubre_bocas_telar.jpg
+  dibujo_anime.jpg
+  dibujo_dinosaurio.jpg
+  dibujo_garou.jpg
+  dibujo_ojo.jpg
+  dibujo_señor.jpg
+  pintura_altar.jpg
+  pintura_dama.jpg
+  pintura_limon.jpg
+  pintura_ortiz.jpg
+  pintura_virgen.jpg
+]
+
+users = (1..5).map do
+  password = Faker::Hobby.activity
+
+ u = User.create({
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    phone: Faker::PhoneNumber.cell_phone,
+    email: Faker::Internet.email,
+    password: password,
+    password_confirmation: password,
+    admin: false
+  })
+end
+
+product_names.each do |product_name|
+  product = Product.create image_url: product_name, name: Faker::Movies::Ghostbusters.character, description: Faker::Movies::Ghostbusters.quote
+  rand(1..15).times do |n|
+    Bid.create amount: n * 10, product: product, user: users.sample
+  end
+end
