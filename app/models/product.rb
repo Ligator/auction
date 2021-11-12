@@ -3,9 +3,11 @@ class Product < ApplicationRecord
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      csv << column_names
+      col_names = column_names.dup
+      col_names.delete("image_url")
+      csv << col_names
       all.each do |product|
-        csv << product.attributes.values_at(*column_names)
+        csv << product.attributes.values_at(*col_names)
       end
     end
   end
