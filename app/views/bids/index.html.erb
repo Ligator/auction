@@ -1,6 +1,7 @@
 <div class="row my-4" id="bids_products_row">
   <%= render "bids/bids_products" %>
 </div>
+
 <% @products.each do |product| %>
   <div class="modal fade" id="modal_product_<%= product.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -44,7 +45,7 @@
 
 <script type="text/javascript">
   function products_refresh() {
-    $.get( "bids/render_bids_row", function( data ) {
+    $.get( "bids/render_bids_row?product_ids_order=<%= @products.map(&:id).join('+') %>", function( data ) {
       $("#bids_products_row").html(data);
     });
   }
