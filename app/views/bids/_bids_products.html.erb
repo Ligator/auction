@@ -25,32 +25,31 @@
           </div>
         </div>
       </div>
-        <% if current_user %>
-          <div class="col mt-3 d-flex align-items-end">
-            <%= form_tag(Bid.new, remote: true) do %>
-              <div class="mb-3">
-                <%= hidden_field_tag :product_id, product.id %>
-                <%= hidden_field_tag :product_ids_order, @products.map(&:id) %>
-                <div class="input-group is-invalid">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
-                  </div>
-                  <%= number_field_tag "bids[amount]", "", id: "bid_amount_product_#{product.id}", class: "form-control mr-2", placeholder: product.next_bid_amount %>
-                  <span id="bid_error_message_product_#{product.id}" class="invalid-feedback">Algo salió mal, por favor vuelva a intentar más tarde.</span>
-                  <%= submit_tag "Ofertar", class: "btn btn-primary bid_amount" %>
+      <% if current_user %>
+        <div class="col mt-3 d-flex align-items-end">
+          <%= form_tag(Bid.new, remote: true) do %>
+            <div class="mb-3">
+              <%= hidden_field_tag :product_id, product.id %>
+              <%= hidden_field_tag :product_ids_order, @products.map(&:id) %>
+              <div class="input-group is-invalid">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
                 </div>
+                <%= number_field_tag "bids[amount]", "", id: "bid_amount_product_#{product.id}", class: "form-control mr-2", placeholder: product.next_bid_amount %>
+                <span id="bid_error_message_product_#{product.id}" class="invalid-feedback">Algo salió mal, por favor vuelva a intentar más tarde.</span>
+                <%= submit_tag "Ofertar", class: "btn btn-primary bid_amount" %>
               </div>
-            <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="col d-none d-md-block">
+          <%= link_to "Inicia Sessión", new_registration_path(:user), class: "col m-1 btn btn-primary" %>
+          <div class="col text-center">
+            <%= link_to "ó Regístrate para poder ofertar", new_registration_path(:user) %>
           </div>
-        <% else %>
-          <div class="col d-none d-md-block">
-              <%= link_to "Inicia Sessión", new_registration_path(:user), class: "col m-1 btn btn-primary" %>
-              <div class="col text-center">
-                <%= link_to "ó Regístrate para poder ofertar", new_registration_path(:user) %>
-              </div>
-          </div>
-        <% end %>
-
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>
