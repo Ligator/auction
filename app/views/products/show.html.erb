@@ -1,45 +1,49 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
-
-<p>
-  <strong>Image url:</strong>
-  <%= @product.image_url %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<div>
-  <%= link_to "CSV", product_path(format: "csv") %> |
-  <%= link_to "Excel", product_path(format: "xls") %>
-  <table class="table table-dark">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Amount</th>
-        <th scope="col">User</th>
-        <th scope="col">Fecha</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @product.bids.each do |bid| %>
-        <tr>
-          <th scope="row"><%= bid.id %></th>
-          <td><%= bid.amount %></td>
-          <td><%= bid.user.first_name %></td>
-          <td><%= bid.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
+<div class="row">
+  <div class="col d-flex justify-content-center">
+    <div class="card mb-3 col-12 col-md-7 col-lg-5">
+      <div class="row no-gutters p-4">
+        <div class="col-md-4">
+          <%= image_tag(@product.image_url, class: "img-thumbnail") %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= @product.name %></h5>
+            <p class="card-text"><%= @product.description %></p>
+          </div>
+          <div class="col">
+            <div class="alert alert-primary font-weight-bold" role="alert">
+              Oferta máxima: <%= @product.max_bid_amount %>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <%= link_to 'Edit', edit_product_path(@product) %> |
+          <%= link_to 'Back', products_path %> |
+          <%= link_to "CSV", product_path(format: "csv") %> |
+          <%= link_to "Excel", product_path(format: "xls") %>
+          <table class="table table-hover table-responsive-lg">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Amount</th>
+                <th scope="col">User</th>
+                <th scope="col">Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @product.bids.each do |bid| %>
+                <tr>
+                  <th scope="row"><%= bid.id %></th>
+                  <td><%= bid.amount %></td>
+                  <td><%= bid.user.first_name %></td>
+                  <td><%= bid.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
