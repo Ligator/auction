@@ -25,8 +25,8 @@
           </div>
         </div>
       </div>
-      <div class="col mt-3 d-flex align-items-end">
-        <% if current_user %>
+      <% if current_user %>
+        <div class="col mt-3 d-flex align-items-end">
           <%= form_tag(Bid.new, remote: true) do %>
             <div class="mb-3">
               <%= hidden_field_tag :product_id, product.id %>
@@ -42,10 +42,15 @@
               </div>
             </div>
           <% end %>
-        <% else %>
-          <%= link_to "Regístrate para poder ofertar", new_registration_path(:user), class: "btn btn-primary" %>
-        <% end %>
-      </div>
+        </div>
+      <% else %>
+        <div class="col d-none d-md-block">
+          <%= link_to "Inicia Sessión", new_registration_path(:user), class: "col m-1 btn btn-primary" %>
+          <div class="col text-center">
+            <%= link_to "ó Regístrate para poder ofertar", new_registration_path(:user) %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>
