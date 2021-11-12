@@ -1,36 +1,48 @@
-<p id="notice"><%= notice %></p>
+<div class="row my-4">
+  <div class="col d-flex justify-content-center">
+    <div class="card mb-3 col-12 col-md-12 col-lg-10">
+      <div class="row p-4">
+        <div class="col-12">
+          <h1>Products</h1>
+        </div>
+        <div class="col-12 pt-2 pb-2 d-flex justify-content-between">
+          <div></div>
+          <div>
+            <%= link_to "CSV", products_path(format: "csv"), class: "btn btn-primary btn-sm" %>
+            <%= link_to "Excel", products_path(format: "xls"), class: "btn btn-primary btn-sm" %>
+          </div>
+        </div>
+        <div class="col">
+          <table class="table table-hover table-responsive-lg">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>N° de Ofertas</th>
+                <th>Ultima Oferta</th>
+                <th colspan="3">Aciones</th>
+              </tr>
+            </thead>
 
-<h1>Products</h1>
-<%= link_to "CSV", products_path(format: "csv") %> |
-<%= link_to "Excel", products_path(format: "xls") %>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Imagen</th>
-      <th>Nombre</th>
-      <th>Descripción</th>
-      <th>N° de Ofertas</th>
-      <th>Ultima Oferta</th>
-      <th colspan="3">Aciones</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td style="width: 120px;"><%= image_tag(product.image_url, class: "img-thumbnail") %></td>
-        <td><%= product.name %></td>
-        <td><%= product.description %></td>
-        <td><%= product.bids.count %></td>
-        <td><%= number_to_currency product.max_bid_amount %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Product', new_product_path %>
+            <tbody>
+              <% @products.each do |product| %>
+                <tr>
+                  <td style="width: 120px;"><%= image_tag(product.image_url, class: "img-thumbnail") %></td>
+                  <td><%= product.name %></td>
+                  <td><%= product.description %></td>
+                  <td><%= product.bids.count %></td>
+                  <td><%= number_to_currency product.max_bid_amount %></td>
+                  <td><%= link_to 'Show', product %></td>
+                  <td><%= link_to 'Edit', edit_product_path(product) %></td>
+                  <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <%= link_to 'New Product', new_product_path, class: "my-4" %>
+    </div>
+  </div>
+</div>
