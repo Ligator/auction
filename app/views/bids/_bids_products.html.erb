@@ -1,5 +1,5 @@
 <% @products.each do |product| %>
-  <div class="col-md-4 mt-2">
+  <div class="p-3">
     <div class="card mb-3 p-3 h-100 <%= 'border border-success' if current_user.present? && @products_user_winning.include?(product) %>">
       <div class="row no-gutters">
         <div class="col-12 text-center">
@@ -13,7 +13,7 @@
             <%= image_tag(product.image_url, class: "img-thumbnail") %>
           </a>
         </div>
-        <div class="col-md-8 d-flex align-items-end flex-column bd-highlight">
+        <div class="col-md-8">
           <div class="card-body">
             <p class="card-text"><%= product.description.truncate(100) %></p>
           </div>
@@ -21,6 +21,7 @@
             <div class="font-weight-bold text-center alert <%= current_user.present? && @products_user_winning.include?(product) ? 'alert-success' : 'alert-primary' %>" role="alert">
               Oferta actual: <%= number_to_currency product.max_bid_amount %>
             </div>
+            <div><%= "<p class='text-success'>Enhorabuena, vas ganando este producto</p>".html_safe if current_user.present? && @products_user_winning.include?(product) %></div>
           </div>
         </div>
       </div>
