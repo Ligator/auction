@@ -23,10 +23,11 @@ class BidsController < ApplicationController
       @products = Product.all
     end
 
-    search_products_where_user_is_winning
-    @bid = product.bids.new(amount: params[:bids][:amount], user_id: current_user.id)
+
+    @bid = product.bids.new(amount: amount, user_id: current_user.id)
 
     if @bid.save
+      search_products_where_user_is_winning
       @message = "Tu oferta se ha enviado"
       respond_to do |format|
         format.html do
@@ -36,6 +37,7 @@ class BidsController < ApplicationController
         format.js
       end
     else
+      search_products_where_user_is_winning
       respond_to do |format|
         @error_message = @bid.errors.full_messages.join(",")
         format.html do
