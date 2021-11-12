@@ -3,17 +3,7 @@ class BidsController < ApplicationController
 
   def index
     @products = Product.all.shuffle
-    if current_user.present?
-      products_bids_user = Product.joins(:bids).where(bids: { user_id: current_user.id } )
-      bids_whit_max_amount_ids = Product.all.map do |product|
-        max_bid_amount = product.max_bid_amount
-        if max_bid_amount && product.bids.present?
-          [product.bids.where(amount: product.max_bid_amount).pluck(:id)]
-        end
-      end
-      bids_whit_max_amount = Bid.where(id: bids_whit_max_amount_ids.flatten, user_id: current_user.id)
-      @products_user_winning = bids_whit_max_amount.map{|bid| bid.product}
-    end
+    search_products_where_user_is_winning
   end
 
   def create
@@ -31,6 +21,7 @@ class BidsController < ApplicationController
       @products = Product.all
     end
 
+    search_products_where_user_is_winning
     @bid = product.bids.new(amount: params[:bids][:amount], user_id: current_user.id)
 
     if @bid.save
@@ -73,6 +64,21 @@ class BidsController < ApplicationController
       @products = Product.all
     end
 
+    search_products_where_user_is_winning
+
     render layout: false
+  end
+
+  def search_products_where_user_is_winning
+    return unless current_user.present?
+
+    bids_whit_max_amount_ids = Product.all.map do |product|
+      max_bid_amount = product.max_bid_amount
+      if max_bid_amount && product.bids.present?
+        [product.bids.where(amount: product.max_bid_amount).pluck(:id)]
+      end
+    end
+    bids_whit_max_amount = Bid.where(id: bids_whit_max_amount_ids.flatten, user_id: current_user.id)
+    @products_user_winning = bids_whit_max_amount.map{|bid| bid.product}
   end
 end
