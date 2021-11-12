@@ -21,7 +21,14 @@ class User < ApplicationRecord
       col_names.delete("admin")
       csv << col_names
       all.each do |user|
-        csv << user.attributes.values_at(*col_names)
+        created_at = user.attributes["created_at"]
+        updated_at = user.attributes["updated_at"]
+        attributes =
+          user
+            .attributes
+            .merge("created_at"=>created_at.strftime("%d/%m/%Y - %H:%M"),
+                   "updated_at"=>updated_at.strftime("%d/%m/%Y - %H:%M"))
+        csv << attributes.values_at(*col_names)
       end
     end
   end

@@ -24,7 +24,7 @@
         <th scope="col">Id</th>
         <th scope="col">Amount</th>
         <th scope="col">User</th>
-        <th scope="col">Hora</th>
+        <th scope="col">Fecha</th>
       </tr>
     </thead>
     <tbody>
@@ -33,7 +33,7 @@
           <th scope="row"><%= bid.id %></th>
           <td><%= bid.amount %></td>
           <td><%= bid.user.first_name %></td>
-          <td><%= bid.created_at %></td>
+          <td><%= bid.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
         </tr>
       <% end %>
     </tbody>

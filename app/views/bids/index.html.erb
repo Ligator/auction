@@ -1,2 +1,37 @@
-<h1>Bids#index</h1>
-<p>Find me in app/views/bids/index.html.erb</p>
+<div class="row my-4">
+  <% @products.each do |product| %>
+    <div class="col-md-4 mt-2">
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <%= image_tag(product.image_url, class: "img-thumbnail") %>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text"><%= product.description %></p>
+              <h3 class="card-text text-success"><%= number_to_currency product.max_bid_amount %></h3>
+              <p class="card-text">
+                <% if current_user %>
+                  <%= form_tag(Bid.new) do %>
+                    <div class="mb-3">
+                      <div class="input-group is-invalid">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <%= number_field_tag "bids[amount]", "", class: "form-control mr-2", placeholder: product.next_bid_amount %>
+                        <%= submit_tag "Ofertar", class: "btn btn-primary" %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <%= link_to "Regístrate para poder ofertar", new_registration_path(:user), class: "btn btn-primary" %>
+                <% end %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
