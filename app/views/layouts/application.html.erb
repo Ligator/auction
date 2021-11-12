@@ -23,8 +23,12 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="form-inline nav-item">
-            <a class="nav-link"><%= link_to "Productos", products_path, :class => "nav-link"  %></a>
-            <a class="nav-link"><%= link_to "Usuarios", users_path, :class => "nav-link"  %></a>
+            <% if user_signed_in?%>
+              <% if current_user.admin%>
+                <a class="nav-link"><%= link_to "Productos", products_path, :class => "nav-link"%></a>
+                <a class="nav-link"><%= link_to "Usuarios", users_path, :class => "nav-link"%></a>
+              <% end %>
+            <% end%>
           </li>
         </ul>
         <ul>
