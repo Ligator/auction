@@ -23,7 +23,6 @@ class BidsController < ApplicationController
       @products = Product.all
     end
 
-
     @bid = product.bids.new(amount: amount, user_id: current_user.id)
 
     if @bid.save
