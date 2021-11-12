@@ -32,4 +32,18 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def standard_phone
+    phone
+      .gsub(" ", "")
+      .gsub("-", "")
+      .gsub("(", "")
+      .gsub(")", "")
+      .gsub(".", "")
+      .gsub("+", "")
+  end
+
+  def valid_phone?
+    standard_phone.length == 10
+  end
 end
