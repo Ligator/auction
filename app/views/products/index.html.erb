@@ -17,7 +17,7 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= image_tag(product.image_url) %></td>
+        <td><%= image_tag(product.image_url, height: "150") %></td>
         <td><%= product.name %></td>
         <td><%= product.description %></td>
         <td><%#= product.offers.count %></td>
