@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'pg'
 gem 'awesome_print'
+gem 'faker'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -46,7 +47,6 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'faker'
 end
 
 group :test do

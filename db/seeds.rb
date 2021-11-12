@@ -103,7 +103,7 @@ elsif  Rails.env.production?
     { image_url: "Leia.jpg", name: "Leía", description: "" }
   ]
 
-  password = Faker::Hobby.activity
+  password = rand(99999999)
   User.create({
     first_name: "Joss",
     last_name: "Cruz",
