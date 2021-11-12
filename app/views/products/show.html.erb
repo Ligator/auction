@@ -33,7 +33,7 @@
           <th scope="row"><%= bid.id %></th>
           <td><%= bid.amount %></td>
           <td><%= bid.user.first_name %></td>
-          <td><%= bid.created_at %></td>
+          <td><%= bid.created_at.strftime("%F %T") %></td>
         </tr>
       <% end %>
     </tbody>
