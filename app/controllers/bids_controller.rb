@@ -24,23 +24,54 @@ class BidsController < ApplicationController
     message = "Tu oferta es menor a la oferta actual"
     return_with_error_message(message) and return if params[:bids][:amount].to_d <= product.max_bid_amount.to_d
 
-    bid = product.bids.new(amount: params[:bids][:amount], user_id: current_user.id)
-
-    if bid.save
-      flash[:notice] = "Tu oferta se ha enviado"
-      redirect_to bids_path
+    product_ids = params[:product_ids_order].to_s.split(" ")
+    if product_ids.present?
+      @products = Product.find(product_ids)
     else
-      flash[:alert] = bid.errors.full_messages.join(",")
+      @products = Product.all
+    end
+
+    @bid = product.bids.new(amount: params[:bids][:amount], user_id: current_user.id)
+
+    if @bid.save
+      @message = "Tu oferta se ha enviado"
+      respond_to do |format|
+        format.html do
+          flash[:notice] = @message
+          redirect_to bids_path
+        end
+        format.js
+      end
+    else
+      respond_to do |format|
+        @error_message = @bid.errors.full_messages.join(",")
+        format.html do
+          flash[:alert] = error_message
+          redirect_to bids_path
+        end
+        format.js
+      end
     end
   end
 
   def return_with_error_message(message)
-    flash[:alert] = message
-    redirect_to root_path
+    @error_message = message
+    respond_to do |format|
+      format.html do
+        flash[:alert] = @error_message
+        redirect_to bids_path
+      end
+      format.js
+    end
   end
 
   def render_bids_row
-    @products = Product.all.shuffle
+    product_ids = params[:product_ids_order].to_s.split(" ")
+    if product_ids.present?
+      @products = Product.find(product_ids)
+    else
+      @products = Product.all
+    end
 
     render layout: false
   end

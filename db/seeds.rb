@@ -74,7 +74,6 @@ if Rails.env.development?
 elsif  Rails.env.production?
   Bid.delete_all
   Product.destroy_all
-  User.destroy_all
 
   product_attributes = [
     { image_url: "BlusaTlahui.jpg", name: "Blusa Tlahuitoltepec", description: "Maestra artesana: Adela Jimenez del colectivo #GuendaShunashi y participante del programa #MujeresAVE Descripción del producto: Blusa de manta con bordado artesanal, de colores rojo y negro tradicionales de Tlahuitoltepec, Mixes. El tiempo de elaboración  consta de 4 días.  Talla: Mediana  Medidas: 43 cm de ancho de espalda y 67 cm de largo" },
@@ -102,17 +101,6 @@ elsif  Rails.env.production?
     { image_url: "Aretes.jpg", name: "Aretes bordado chatino", description: "Maestra artesana: Soledad Zurita del colectivo #GuendaShunashi y participante del programa #MujeresAVE Producto: " },
     { image_url: "Leia.jpg", name: "Leía", description: "" }
   ]
-
-  password = rand(99999999)
-  User.create({
-    first_name: "Joss",
-    last_name: "Cruz",
-    phone: "951 123 4567",
-    email: "emprende.ecoosmx@gmail.com",
-    password: password,
-    password_confirmation: password,
-    admin: true
-  })
 
   product_attributes.each do |product_attribute|
     Product.create product_attribute
