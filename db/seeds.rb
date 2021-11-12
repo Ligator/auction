@@ -8,37 +8,103 @@
 
 require 'faker'
 
-product_names = %w[
-  cubre_bocas_telar.jpg
-  dibujo_anime.jpg
-  dibujo_dinosaurio.jpg
-  dibujo_garou.jpg
-  dibujo_ojo.jpg
-  dibujo_señor.jpg
-  pintura_altar.jpg
-  pintura_dama.jpg
-  pintura_limon.jpg
-  pintura_ortiz.jpg
-  pintura_virgen.jpg
-]
+if Rails.env.development?
+  Bid.delete_all
+  Product.destroy_all
+  User.destroy_all
 
-users = (1..5).map do
+  product_names = %w[
+    BlusaTlahui.jpg
+    Adri1.jpg
+    Adri2.jpg
+    MujerTrazos.jpg
+    DamaBici.jpg
+    Virgen.jpg
+    Vela.jpg
+    Garou.jpg
+    SetRosa.jpg
+    SetCafe.jpg
+    Muñeca.jpg
+    OjoGirasol.jpg
+    Vereda.jpg
+    DamaNegro.jpg
+    Dragon.jpg
+    Jamiltepec.jpg
+    Colores.jpg
+    HombreRojo.jpg
+    Dino.jpg
+    Limas.jpg
+    SetPalma.jpg
+    Bolsa.jpg
+    Aretes.jpg
+    Leia.jpg
+  ]
+
+  users = (1..5).map do
+    password = Faker::Hobby.activity
+
+    User.create({
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      phone: Faker::PhoneNumber.cell_phone,
+      email: Faker::Internet.email,
+      password: password,
+      password_confirmation: password,
+      admin: false
+    })
+  end
+
+  product_names.each do |product_name|
+    product = Product.create image_url: product_name, name: Faker::Movies::Ghostbusters.character, description: Faker::Movies::Ghostbusters.quote
+    rand(1..15).times do |n|
+      Bid.create amount: n * 10, product: product, user_id: users.sample.id
+    end
+  end
+
+elsif  Rails.env.production?
+  Bid.delete_all
+  Product.destroy_all
+  User.destroy_all
+
+  product_names = %w[
+    BlusaTlahui.jpg
+    Adri1.jpg
+    Adri2.jpg
+    MujerTrazos.jpg
+    DamaBici.jpg
+    Virgen.jpg
+    Vela.jpg
+    Garou.jpg
+    SetRosa.jpg
+    SetCafe.jpg
+    Muñeca.jpg
+    OjoGirasol.jpg
+    Vereda.jpg
+    DamaNegro.jpg
+    Dragon.jpg
+    Jamiltepec.jpg
+    Colores.jpg
+    HombreRojo.jpg
+    Dino.jpg
+    Limas.jpg
+    SetPalma.jpg
+    Bolsa.jpg
+    Aretes.jpg
+    Leia.jpg
+  ]
+
   password = Faker::Hobby.activity
-
- u = User.create({
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    phone: Faker::PhoneNumber.cell_phone,
-    email: Faker::Internet.email,
+  User.create({
+    first_name: "Joss",
+    last_name: "Cruz",
+    phone: "951 123 4567",
+    email: "emprende.ecoosmx@gmail.com",
     password: password,
     password_confirmation: password,
-    admin: false
+    admin: true
   })
-end
 
-product_names.each do |product_name|
-  product = Product.create image_url: product_name, name: Faker::Movies::Ghostbusters.character, description: Faker::Movies::Ghostbusters.quote
-  rand(1..15).times do |n|
-    Bid.create amount: n * 10, product: product, user: users.sample
+  product_names.each do |product_name|
+    Product.create image_url: product_name
   end
 end
