@@ -17,12 +17,14 @@ class BidsController < ApplicationController
   end
 
   def create
+    amount = (params[:bids][:amount].presence || params[:placeholder_amount]).to_d
+
     message = "No se puede crear una oferta para un producto vacío."
     return_with_error_message(message) and return if params[:product_id].blank?
     product = Product.find(params[:product_id])
 
-    message = "Tu oferta es menor a la oferta actual"
-    return_with_error_message(message) and return if params[:bids][:amount].to_d <= product.max_bid_amount.to_d
+    message = "Tu oferta es menor a la oferta actual."
+    return_with_error_message(message) and return if amount <= product.max_bid_amount.to_d
 
     product_ids = params[:product_ids_order].to_s.split(" ")
     if product_ids.present?
@@ -31,7 +33,7 @@ class BidsController < ApplicationController
       @products = Product.all
     end
 
-    @bid = product.bids.new(amount: params[:bids][:amount], user_id: current_user.id)
+    @bid = product.bids.new(amount: amount, user_id: current_user.id)
 
     if @bid.save
       @message = "Tu oferta se ha enviado"
