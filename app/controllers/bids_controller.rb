@@ -6,9 +6,12 @@ class BidsController < ApplicationController
   end
 
   def create
+    message = "No se puede crear una oferta para un producto vacío."
+    return_with_error_message(message) and return if params[:product_id].blank?
     product = Product.find(params[:product_id])
 
-    return_with_error_message and return if params[:bids][:amount].to_d <= product.max_bid_amount.to_d
+    message = "Tu oferta es menor a la oferta actual"
+    return_with_error_message(message) and return if params[:bids][:amount].to_d <= product.max_bid_amount.to_d
 
     bid = product.bids.new(amount: params[:bids][:amount], user_id: current_user.id)
 
@@ -20,8 +23,8 @@ class BidsController < ApplicationController
     end
   end
 
-  def return_with_error_message
-    flash[:alert] = "Tu oferta es menor a la oferta actual"
+  def return_with_error_message(message)
+    flash[:alert] = message
     redirect_to root_path
   end
 
