@@ -13,7 +13,6 @@
               <h3 class="card-text text-success"><%= number_to_currency product.max_bid_amount %></h3>
               <p class="card-text">
                 <% if current_user %>
-
                   <%= form_tag(Bid.new) do %>
                     <div class="mb-3">
                       <div class="input-group is-invalid">
@@ -25,7 +24,6 @@
                       </div>
                     </div>
                   <% end %>
-
                 <% else %>
                   <%= link_to "Regístrate para poder ofertar", new_registration_path(:user), class: "btn btn-primary" %>
                 <% end %>
