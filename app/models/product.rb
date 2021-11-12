@@ -27,6 +27,6 @@ class Product < ApplicationRecord
 
   def next_bid_amount
     next_bid_amount = (max_bid_amount.to_d / ROUND_FACTOR).ceil * ROUND_FACTOR
-    next_bid_amount == max_bid_amount ? max_bid_amount + ROUND_FACTOR : max_bid_amount
+    next_bid_amount == max_bid_amount ? max_bid_amount + ROUND_FACTOR : next_bid_amount
   end
 end
