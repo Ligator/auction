@@ -2,6 +2,6 @@ Rails.application.routes.draw do
   get 'statics/coming'
   devise_for :users
   resources :products
-  root "products#index"
+  root "statics#coming"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
