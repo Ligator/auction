@@ -75,41 +75,31 @@
       </div>
     <% end %>
     <%= yield  %>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
-      <ul class="navbar-nav">
-        <li class="navbar-brand">
-          <a>Comité Organizador del Buen Fin Solidario </a>
-        </li>
-      </ul>
-      <ul class="form-inline my-2 my-lg-2 nav-item flex-grow-2 dropdown active">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse position-right" id="navbarNavDropdown">
-          <ul class="navbar-nav navbar-light bg-light ">          <li class="nav-item">
-              <a class="nav-link" href="#">Preguntas frecuentes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contáctanos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Eventos</a>
-            </li>
-            <li class="nav-item mr-sm-2">
-              <a class="nav-link" href="#">Términos y condiciones</a>
-            </li> 
-            <li class="nav-item mr-sm-2">
-              <a class="nav-link" href="#">Subastas</a>
-            </li>   
-          </ul>
-        </div>
-      </ul>
-    </nav>
+    <div class="container-fluid mx-auto w-55 p-3 text-center bg-light fixed-bottom">
+      <div class="row">
+        <ul class="mx-auto w-55 p-3 text-center">
+            Comité Organizador del Buen Fin Solidario    
+        </ul>   
+      </div>
+      <div class="row mx-auto w-55 p-3 text-center">
+        <ul class="form-inline my-2 my-lg-2 flex-grow-2 dropdown active">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="col-md"><td><%= image_tag "logo_ecos.png",size: "120x120" %></td></div>
+          <div class="col-md"><td><%= image_tag "logo_etno.png", size: "120x120" %></td></div>
+          <div class="col-md"><td><%= image_tag "logo_hub.png", size: "160x100" %></td></div>
+          <div class="col-md"><td><%= image_tag "logo_luum.png", size: "160x100" %></td></div> 
+          <div class="col-md"><td><%= image_tag "logo_new.png", size: "120x120" %></td></div>  
+          <div class="col-md"><td><%= image_tag "logo_nodo.png", size: "120x120" %></td></div>
+          <div class="col-md"><td><%= image_tag "logo_imjuci.png", size: "180x100" %></td></div>
+
+        </ul>
+      </div>  
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
   </body>
 </html>
-
-
 
