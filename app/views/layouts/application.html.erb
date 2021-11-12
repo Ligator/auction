@@ -59,15 +59,16 @@
         </ul>
       </div>
     </nav>
+    <div class="col-md text-center"><td><%= image_tag "ARRIBA .png", class: "m-2", style: "max-width: 100%;" %></td></div>
     <% if flash[:notice].present? %>
-      <div class="alert alert-success m-2" role="alert" id="alert1">
+      <div class="alert alert-success mb-2" role="alert" id="alert1">
         <%= notice %>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
     <% elsif flash[:alert].present? %>
-      <div class="alert alert-danger m-2" role="alert" id="alert2">
+      <div class="alert alert-danger mb-2" role="alert" id="alert2">
         <%= alert %>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -81,20 +82,8 @@
             Comité Organizador del Buen Fin Solidario    
         </ul>   
       </div>
-      <div class="row mx-auto w-55 p-3 text-center">
-        <ul class="form-inline my-2 my-lg-2 flex-grow-2 dropdown active">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="col-md"><td><%= image_tag "logo_ecos.png",size: "120x120" %></td></div>
-          <div class="col-md"><td><%= image_tag "logo_etno.png", size: "120x120" %></td></div>
-          <div class="col-md"><td><%= image_tag "logo_hub.png", size: "160x100" %></td></div>
-          <div class="col-md"><td><%= image_tag "logo_luum.png", size: "160x100" %></td></div> 
-          <div class="col-md"><td><%= image_tag "logo_new.png", size: "120x120" %></td></div>  
-          <div class="col-md"><td><%= image_tag "logo_nodo.png", size: "120x120" %></td></div>
-          <div class="col-md"><td><%= image_tag "logo_imjuci.png", size: "180x100" %></td></div>
-
-        </ul>
+      <div class="row mx-auto text-center">
+        <div class="col-md text-center"><td><%= image_tag "ABAJO LOGOS.png", style: "max-width: 100%;" %></td></div>
       </div>  
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

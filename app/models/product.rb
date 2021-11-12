@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_many :bids
 
-  ROUND_FACTOR = 10
+  ROUND_FACTOR = 20
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|

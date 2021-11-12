@@ -17,7 +17,7 @@ class BidsController < ApplicationController
 
     if bid.save
       flash[:notice] = "Tu oferta se ha enviado"
-      redirect_to root_path
+      redirect_to bids_path
     else
       flash[:alert] = bid.errors.full_messages.join(",")
     end
