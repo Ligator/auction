@@ -25,6 +25,7 @@
           <li class="form-inline nav-item">
             <% if user_signed_in?%>
               <% if current_user.admin%>
+                <a class="nav-link"><%= link_to "Subasta", bids_path, :class => "nav-link"%></a>
                 <a class="nav-link"><%= link_to "Productos", products_path, :class => "nav-link"%></a>
                 <a class="nav-link"><%= link_to "Usuarios", users_path, :class => "nav-link"%></a>
               <% end %>
@@ -43,9 +44,7 @@
             <% if user_signed_in? %>
               <div class="dropdown-menu m-0 " aria-labelledby="navbarDropdown">
                 <%= label_tag current_user.email, nil, class: "px-4 pt-2 text-muted" %>
-                
                 <%= link_to "Perfil", edit_user_registration_path, :class => "nav-link" %>
-                
                 <%= link_to "Salir", destroy_user_session_path, method: :delete, :class => "nav-link" %>
               </div>
             <% else %>
