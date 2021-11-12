@@ -20,8 +20,8 @@ class User < ApplicationRecord
       col_names.delete("remember_created_at")
       col_names.delete("admin")
       csv << col_names
-      all.each do |product|
-        csv << product.attributes.values_at(*col_names)
+      all.each do |user|
+        csv << user.attributes.values_at(*col_names)
       end
     end
   end
