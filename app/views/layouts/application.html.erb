@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <%= link_to "Registrar", new_user_registration_path, :class => 'navbar-link btn btn-primary m-1'  %>
+    <%= link_to "Acceder", new_user_session_path, :class => 'navbar-link btn btn-primary m-1'  %>
+    <%= link_to "Perfil", edit_user_registration_path, :class => 'navbar-link btn btn-warning btn-md m-1' %>
+    <%= link_to "Salir", destroy_user_session_path, method: :delete, :class => 'navbar-link btn btn-danger btn-md m-1' %>
     <%= yield %>
   </body>
 </html>
