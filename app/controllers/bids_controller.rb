@@ -24,4 +24,10 @@ class BidsController < ApplicationController
     flash[:alert] = "Tu oferta es menor a la oferta actual"
     redirect_to root_path
   end
+
+  def render_bids_row
+    @products = Product.all.shuffle
+
+    render layout: false
+  end
 end

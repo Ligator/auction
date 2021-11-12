@@ -1,1 +1,56 @@
-<%= render "bids/bids_products" %>
+<div class="row my-4" id="bids_products_row">
+  <%= render "bids/bids_products" %>
+</div>
+<% @products.each do |product| %>
+  <div class="modal fade" id="modal_product_<%= product.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><%= product.name %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <div class="card mb-3 col-12 border-0">
+                <div class="row no-gutters p-4">
+                  <div class="col-md-7 d-flex align-items-center">
+                    <%= image_tag(product.image_url, class: "img-thumbnail") %>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="card-body">
+                      <p class="card-text"><%= product.description %></p>
+                    </div>
+                    <div class="col">
+                      <div class="alert alert-primary font-weight-bold text-center" role="alert">
+                        Oferta actual: <%= number_to_currency(product.max_bid_amount) %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  function products_refresh() {
+    $.get( "bids/render_bids_row", function( data ) {
+      $("#bids_products_row").html(data);
+    });
+  }
+
+  setInterval(function(){
+    products_refresh()
+  }, 60000);
+
+</script>
