@@ -17,8 +17,8 @@ class Bid < ApplicationRecord
             .attributes
             .merge("ID" => bid.id,
                    "Producto" => bid.product.name,
-                   "Creado"=>created_at.strftime("%d/%m/%Y - %H:%M"),
-                   "Actualizado"=>updated_at.strftime("%d/%m/%Y - %H:%M"),
+                   "Creado" => created_at.strftime("%d/%m/%Y - %H:%M"),
+                   "Actualizado" => updated_at.strftime("%d/%m/%Y - %H:%M"),
                    "Usuario" => User.find(user_id).full_name,
                    "Oferta" => "$#{bid.amount}")
         csv << attributes.values_at(*col_names)

@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      col_names = ["ID", "Correo", "Nombre", "Apellidos", "Telefono", "Creado", "Actualizado"]
+      col_names = ["ID", "Nombre", "Apellidos", "Correo", "Telefono", "Registrado", "Actualizado"]
       csv << col_names
       all.each do |user|
         created_at = user.attributes["created_at"]
@@ -22,11 +22,11 @@ class User < ApplicationRecord
           user
             .attributes
             .merge("ID" => user.id,
-                   "Correo" => user.email,
                    "Nombre" => user.first_name,
                    "Apellidos" => user.last_name,
+                   "Correo" => user.email,
                    "Telefono" => user.phone,
-                   "Creado"=>created_at.strftime("%d/%m/%Y - %H:%M"),
+                   "Registrado"=>created_at.strftime("%d/%m/%Y - %H:%M"),
                    "Actualizado"=>updated_at.strftime("%d/%m/%Y - %H:%M"))
         csv << attributes.values_at(*col_names)
       end
