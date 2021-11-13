@@ -6,17 +6,24 @@ class Bid < ApplicationRecord
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      csv << column_names
+      col_names = ["ID", "Producto", "Oferta", "Usuario", "Creado", "Actualizado"]
+      csv << col_names
       all.each do |bid|
         created_at = bid.attributes["created_at"]
         updated_at = bid.attributes["updated_at"]
+        user_id = bid.attributes["user_id"]
         attributes =
           bid
             .attributes
-            .merge("created_at"=>created_at.strftime("%d/%m/%Y - %H:%M"),
-                   "updated_at"=>updated_at.strftime("%d/%m/%Y - %H:%M"))
-        csv << attributes.values_at(*column_names)
+            .merge("ID" => bid.id,
+                   "Producto" => bid.product.name,
+                   "Creado" => created_at.strftime("%d/%m/%Y - %H:%M"),
+                   "Actualizado" => updated_at.strftime("%d/%m/%Y - %H:%M"),
+                   "Usuario" => User.find(user_id).full_name,
+                   "Oferta" => "$#{bid.amount}")
+        csv << attributes.values_at(*col_names)
       end
     end
   end
 end
+
