@@ -15,7 +15,7 @@
       <%= f.label :email, t("activerecord.attributes.user.email") %>
       <%= f.email_field :email, class: "justify-content form-control", autofocus: true, autocomplete: "email", required: true %>
       <%= f.label :phone, t(:phone_number) %>
-      <%= f.text_field :phone, class: "justify-content form-control", autofocus: true, autocomplete: "phone", required: true %>
+      <%= f.text_field :phone, class: "justify-content form-control", placeholder: "Diez dígitos", autofocus: true, autocomplete: "phone", required: true %>
     </div>
     <div class="form-group">
       <%= f.label :password, t("activerecord.attributes.user.password") %>
