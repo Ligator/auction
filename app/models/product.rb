@@ -5,8 +5,7 @@ class Product < ApplicationRecord
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      col_names = column_names.dup
-      col_names.delete("image_url")
+      col_names = ["ID","Nombre","Descripción", "N° Ofertas", "Ultima Oferta", "Ofertante", "Contacto", "Creado", "Actualizado"]
       csv << col_names
       all.each do |product|
         created_at = product.attributes["created_at"]
@@ -14,8 +13,15 @@ class Product < ApplicationRecord
         attributes =
           product
             .attributes
-            .merge("created_at"=>created_at.strftime("%d/%m/%Y - %H:%M"),
-                   "updated_at"=>updated_at.strftime("%d/%m/%Y - %H:%M"))
+            .merge("ID" => product.id,
+                   "Nombre" => product.name,
+                   "Descripción" => product.description,
+                   "N° Ofertas" => product.bids.count,
+                   "Ultima Oferta" => "$#{product.max_bid_amount}",
+                   "Ofertante" => product.bids.last.user.full_name,
+                   "Contacto" => product.bids.last.user.phone,
+                   "Creado"=>created_at.strftime("%d/%m/%Y - %H:%M"),
+                   "Actualizado"=>updated_at.strftime("%d/%m/%Y - %H:%M"))
         csv << attributes.values_at(*col_names)
       end
     end

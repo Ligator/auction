@@ -13,12 +13,7 @@ class User < ApplicationRecord
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      col_names = column_names.dup
-      col_names.delete("encrypted_password")
-      col_names.delete("reset_password_token")
-      col_names.delete("reset_password_sent_at")
-      col_names.delete("remember_created_at")
-      col_names.delete("admin")
+      col_names = ["ID", "Correo", "Nombre", "Apellidos", "Telefono", "Creado", "Actualizado"]
       csv << col_names
       all.each do |user|
         created_at = user.attributes["created_at"]
@@ -26,8 +21,13 @@ class User < ApplicationRecord
         attributes =
           user
             .attributes
-            .merge("created_at"=>created_at.strftime("%d/%m/%Y - %H:%M"),
-                   "updated_at"=>updated_at.strftime("%d/%m/%Y - %H:%M"))
+            .merge("ID" => user.id,
+                   "Correo" => user.email,
+                   "Nombre" => user.first_name,
+                   "Apellidos" => user.last_name,
+                   "Telefono" => user.phone,
+                   "Creado"=>created_at.strftime("%d/%m/%Y - %H:%M"),
+                   "Actualizado"=>updated_at.strftime("%d/%m/%Y - %H:%M"))
         csv << attributes.values_at(*col_names)
       end
     end
