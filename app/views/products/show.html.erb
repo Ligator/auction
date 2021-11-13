@@ -34,7 +34,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @product.bids.each do |bid| %>
+              <% @product.bids.order(amount: :desc).each do |bid| %>
                 <tr>
                   <th scope="row"><%= bid.id %></th>
                   <td><%= bid.amount %></td>

@@ -23,6 +23,7 @@
                 <th scope="col">Teléfono</th>
                 <th scope="col">N° de Ofertas</th>
                 <th scope="col">Oferta Máxima</th>
+                <th scope="col">Ganando</th>
               </tr>
             </thead>
             <tbody>
@@ -35,6 +36,7 @@
                   <td><%= user.valid_phone? ? link_to(user.phone, "https://wa.me/#{user.standard_phone}") : user.phone %></td>
                   <td><%= user.bids.count %></td>
                   <td><%= number_to_currency user.bids.maximum(:amount) %></td>
+                  <td><%= links_to_product(user.products_where_user_is_winning) %></td>
                 </tr>
               <% end %>
             </tbody>
