@@ -6,4 +6,11 @@ module ApplicationHelper
       end
     links.flatten.join("<br>").html_safe
   end
+
+  def user_contact(user)
+    contact = ""
+    contact += "<p>#{user.email}</p>"
+    contact += "<p>#{user.phone}</p>"
+    contact.html_safe
+  end
 end

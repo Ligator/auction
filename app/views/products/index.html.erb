@@ -36,7 +36,7 @@
                   <td><%= product.bids.count %></td>
                   <td><%= number_to_currency product.max_bid_amount %></td>
                   <td><%= product.bids.last.user.full_name %></td>
-                  <td><%= product.bids.last.user.contact %></td>
+                  <td><%= user_contact(product.bids.last.user) %></td>
                   <td><%= link_to 'Show', product %></td>
                   <td><%= link_to 'Edit', edit_product_path(product) %></td>
                   <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>

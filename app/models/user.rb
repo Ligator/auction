@@ -37,13 +37,6 @@ class User < ApplicationRecord
     [first_name, last_name].join(" ")
   end
 
-  def contact
-    contact = ""
-    contact += "<p>#{email}</p>"
-    contact += "<p>#{phone}</p>"
-    contact.html_safe
-  end
-
   def standard_phone
     phone
       .gsub(" ", "")
