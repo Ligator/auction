@@ -27,20 +27,27 @@
       </div>
       <% if current_user %>
         <div class="col mt-3 d-flex align-items-end">
-          <%= form_tag(Bid.new, remote: true) do %>
-            <div class="mb-3">
+          <%= form_tag(Bid.new, class: "form_bid form-inline", remote: true) do %>
+            <span class="span_product_name d-none"><%= product.name %></span>
+            <span class="div_bid_hidden_fields">
               <%= hidden_field_tag :product_id, product.id %>
               <%= hidden_field_tag :product_ids_order, @products.map(&:id) %>
               <%= hidden_field_tag :placeholder_amount, product.next_bid_amount %>
-              <div class="input-group is-invalid">
+            </span>
+
+            <div class="div_bid_amount_field">
+              <div class="input-group">
                 <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
+                  <span class="input-group-text" id="validatedInputGroupPrepend">$</span>
                 </div>
-                <%= number_field_tag "bids[amount]", "", id: "bid_amount_product_#{product.id}", class: "form-control mr-2", placeholder: product.next_bid_amount %>
-                <span id="bid_error_message_product_<%= product.id %>" class="invalid-feedback">Algo salió mal, por favor vuelva a intentar más tarde.</span>
-                <%= submit_tag "Ofertar", class: "btn btn-primary bid_amount" %>
+                <%= number_field_tag "bids[amount]", "", class: "form-control mr-2 bid_amount_product_#{product.id}", placeholder: product.next_bid_amount %>
+              </div>
+              <div class="invalid-feedback bid_error_message_product_<%= product.id %>">
+                Algo salió mal, por favor vuelva a intentar más tarde.
               </div>
             </div>
+
+            <%= submit_tag "Ofertar", class: "btn btn-primary" %>
           <% end %>
         </div>
       <% else %>
@@ -54,3 +61,20 @@
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(".form_bid").on("submit", function(event){
+    event.preventDefault();
+    var form = $(this);
+    var hidden_fields = form.find(".div_bid_hidden_fields").clone();
+    var amount_field  = form.find(".div_bid_amount_field").clone();
+    var product_name  = form.find(".span_product_name").clone().removeClass("d-none");
+
+    var general_form = $("#general_form_bid");
+    general_form.find(".div_bid_hidden_fields").html(hidden_fields);
+    general_form.find(".div_bid_amount_field").html(amount_field);
+    general_form.find(".span_product_name").html(product_name);
+    $("#modal_place_bid").modal("show");
+    return false;
+  });
+</script>

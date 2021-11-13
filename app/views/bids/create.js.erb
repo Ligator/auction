@@ -1,5 +1,9 @@
 $("#bids_products_row").html('<%= j render "bids/bids_products" %>');
+
 <% if @error_message.present? %>
-  $("#bid_amount_product_<%= @bid.product_id %>").addClass("is-invalid");
-  $("#bid_error_message_product_<%= @bid.product_id %>").html("<%= @error_message %>");
+  $(".bid_amount_product_<%= @bid.product_id %>").addClass("is-invalid");
+  $(".bid_amount_product_<%= @bid.product_id %>").closest(".input-group").addClass("is-invalid");
+  $(".bid_error_message_product_<%= @bid.product_id %>").html("<%= @error_message %>");
+<% else %>
+  $("#modal_place_bid").modal("hide");
 <% end %>

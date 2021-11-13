@@ -43,6 +43,29 @@
   </div>
 <% end %>
 
+<div id="modal_place_bid" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag(Bid.new, id: "general_form_bid", remote: true) do %>
+        <div class="modal-header">
+          <h4 class="modal-title">Confirma tu oferta</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Por favor confirma la cantidad que deseas ofertar para:</p>
+          <h3 class="text-center"><span class="span_product_name"></span></h3>
+          <div class="div_bid_hidden_fields"></div>
+          <div class="div_bid_amount_field w-50 mx-auto"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <%= submit_tag "Ofertar", class: "btn btn-primary bid_amount" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
   function products_refresh() {
     $.get( "bids/render_bids_row?product_ids_order=<%= @products.map(&:id).join('+') %>", function( data ) {
