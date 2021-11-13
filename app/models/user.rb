@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   # validates :admin, presence: true
-  validates :phone, presence: true, length: { minimum: 10} 
+  validates :phone, presence: true, length: { minimum: 10 } 
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
