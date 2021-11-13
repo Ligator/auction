@@ -49,8 +49,14 @@
                 <%= link_to "Salir", destroy_user_session_path, method: :delete, :class => "nav-link" %>
               </div>
             <% else %>
-              <a class="nav-link"><%= link_to "Registrarse", new_user_registration_path%></a>
-              <a class="nav-link"><%= link_to "Iniciar Sesión", new_user_session_path %></a>
+              <div class="row row-cols-1 row-cols-md-2">
+                <div class="col">
+                  <%= link_to "Registrarse", new_user_registration_path, class: "navbar-link btn btn-outline-success btn-md m-1" %>
+                </div>
+                <div class="col">
+                  <%= link_to "Iniciar Sesión", new_user_session_path, class: "navbar-link btn btn-outline-primary btn-md m-1 text-nowrap" %>
+                </div>
+              </div>
             <% end %>
           </li> 
         </ul>
