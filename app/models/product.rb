@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_many :bids
 
-  ROUND_FACTOR = 20
+  ROUND_FACTOR = 10
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
@@ -33,7 +33,7 @@ class Product < ApplicationRecord
   end
 
   def next_bid_amount
-    next_bid_amount = (max_bid_amount.to_d / ROUND_FACTOR).ceil * ROUND_FACTOR
-    next_bid_amount == max_bid_amount ? max_bid_amount + ROUND_FACTOR : next_bid_amount
+    next_bid_amount = (((max_bid_amount.to_d + 0.1) / 10.0).ceil * 10) + 10
+    next_bid_amount == max_bid_amount ? max_bid_amount : next_bid_amount
   end
 end
