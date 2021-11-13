@@ -6,7 +6,7 @@
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class="form-group">
       <%= f.label :email, t("activerecord.attributes.user.email")%>
-      <%= f.email_field :email, class: "justify-content form-control", autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, class: "justify-content form-control", autofocus: true, autocomplete: "email", required: true %>
     </div>
     <div class=" field justify-content">
       <div class="actions">

@@ -10,23 +10,48 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image_url %>
-    <%= form.text_field :image_url %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="row justify-content-md justify-content-center">
+    <div class="col-md-10 d-flex justify-content-center">
+      <div class="card mb-6 col-10 col-md-10 col-lg-10">
+        <div class="row no-gutters p-4">
+          <div class="col-md-4 text-center">
+            <div class="field">
+              <h4>
+                <%= form.label :image_url, class: "align-items-center" %>
+              </h4>
+              <%= form.text_field :image_url,  class: "form-control text-center" %>
+              <%= image_tag(@product.image_url, class: "img-thumbnail") %>
+            </div>
+          </div>
+          <div class="col-md-8 text-center">
+            <div class="card-body">
+              <div class="field  form-group">
+                <h4>
+                  <%= form.label :name, class: "align-items-center" %>
+                </h4>
+                <%= form.text_field :name, class: "form-control text-center" %>
+              </div>            
+              <div class="field form-group">
+                <h4>
+                  <%= form.label :description, class: "align-items-center" %>
+                </h4>   
+                <%= form.text_area :description, class: "form-control", id: "exampleFormControlTextarea4", rows:"10" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="actions mx-auto">
+          <%= form.submit :Actualizar, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
+
+
+  
+
+  
+  
+
+ 
