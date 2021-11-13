@@ -10,6 +10,7 @@ es:
         current_sign_in_at: Fecha del ingreso actual
         current_sign_in_ip: IP del ingreso actual
         email: Correo electrónico
+        phone: Teléfono
         encrypted_password: Contraseña cifrada
         failed_attempts: Intentos fallidos
         last_sign_in_at: Fecha del último ingreso
@@ -29,6 +30,18 @@ es:
       user:
         one: Usuario
         other: Usuarios
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: debe ser igual a la anterior
+            password:
+              too_short: debe tener 6 carácteres mínimo
+            phone:
+              too_short: debe tener 10 dígitos
+            email:
+              taken: ya esta registrado
   devise:
     confirmations:
       confirmed: Tu cuenta ha sido confirmada satisfactoriamente.
