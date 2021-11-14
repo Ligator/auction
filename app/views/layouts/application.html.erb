@@ -15,79 +15,85 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a><%= link_to "Subasta Solidaria", root_path, :class => "navbar-brand"%></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="form-inline nav-item">
-            <% if user_signed_in?%>
-              <% if current_user.admin%>
-                <a class="nav-link"><%= link_to "Subasta", bids_path, :class => "nav-link"%></a>
-                <a class="nav-link"><%= link_to "Productos", products_path, :class => "nav-link"%></a>
-                <a class="nav-link"><%= link_to "Usuarios", users_path, :class => "nav-link"%></a>
-              <% end %>
-            <% end%>
-          </li>
-        </ul>
-        <ul>
-          <li class="form-inline my-2 my-lg-0 nav-item flex-grow-2 dropdown active">
-            <a href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <% if user_signed_in? %>
-                <%= current_user.email %>
-              <% else %>
-                <span class="fas fa-user" style="font-size: 20px;"></span>
-              <% end %>
-            </a>
-            <% if user_signed_in? %>
-              <div class="dropdown-menu m-0 " aria-labelledby="navbarDropdown">
-                <%= label_tag current_user.email, nil, class: "px-4 pt-2 text-muted" %>
-                <%= link_to "Perfil", edit_user_registration_path, :class => "nav-link" %>
-                <%= link_to "Salir", destroy_user_session_path, method: :delete, :class => "nav-link" %>
-              </div>
-            <% else %>
-              <div class="row row-cols-1 row-cols-md-2">
-                <div class="col">
-                  <%= link_to "Registrarse", new_user_registration_path, class: "navbar-link btn btn-outline-success btn-md m-1" %>
-                </div>
-                <div class="col">
-                  <%= link_to "Iniciar Sesión", new_user_session_path, class: "navbar-link btn btn-outline-primary btn-md m-1 text-nowrap" %>
-                </div>
-              </div>
-            <% end %>
-          </li> 
-        </ul>
-      </div>
-    </nav>
-    <div class="col-md text-center"><td><%= image_tag "ARRIBA.png", class: "m-2", style: "max-width: 100%;" %></td></div>
-    <% if flash[:notice].present? %>
-      <div class="alert alert-success mb-2" role="alert" id="alert1">
-        <%= notice %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% elsif flash[:alert].present? %>
-      <div class="alert alert-danger mb-2" role="alert" id="alert2">
-        <%= alert %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
-    <%= yield  %>
-    <div class="container-fluid mx-auto w-55 p-3 text-center bg-light">
+    <div class="container-fluid">
       <div class="row">
-        <ul class="mx-auto w-55 p-3 text-center">
-            Comité Organizador del Buen Fin Solidario    
-        </ul>   
+        <div class="col-lg-11 mx-auto">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a><%= link_to "Subasta Solidaria", root_path, :class => "navbar-brand"%></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="form-inline nav-item">
+                  <% if user_signed_in?%>
+                    <% if current_user.admin%>
+                      <a class="nav-link"><%= link_to "Subasta", bids_path, :class => "nav-link"%></a>
+                      <a class="nav-link"><%= link_to "Productos", products_path, :class => "nav-link"%></a>
+                      <a class="nav-link"><%= link_to "Usuarios", users_path, :class => "nav-link"%></a>
+                    <% end %>
+                  <% end%>
+                </li>
+              </ul>
+              <ul>
+                <li class="form-inline my-2 my-lg-0 nav-item flex-grow-2 dropdown active">
+                  <a href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <% if user_signed_in? %>
+                      <%= current_user.email %>
+                    <% else %>
+                      <span class="fas fa-user" style="font-size: 20px;"></span>
+                    <% end %>
+                  </a>
+                  <% if user_signed_in? %>
+                    <div class="dropdown-menu m-0 " aria-labelledby="navbarDropdown">
+                      <%= label_tag current_user.email, nil, class: "px-4 pt-2 text-muted" %>
+                      <%= link_to "Perfil", edit_user_registration_path, :class => "nav-link" %>
+                      <%= link_to "Salir", destroy_user_session_path, method: :delete, :class => "nav-link" %>
+                    </div>
+                  <% else %>
+                    <div class="row row-cols-1 row-cols-md-2">
+                      <div class="col">
+                        <%= link_to "Registrarse", new_user_registration_path, class: "navbar-link btn btn-outline-success btn-md m-1" %>
+                      </div>
+                      <div class="col">
+                        <%= link_to "Iniciar Sesión", new_user_session_path, class: "navbar-link btn btn-outline-primary btn-md m-1 text-nowrap" %>
+                      </div>
+                    </div>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div class="col-md text-center"><td><%= image_tag "ARRIBA.png", class: "m-2", style: "max-width: 100%;" %></td></div>
+          <% if flash[:notice].present? %>
+            <div class="alert alert-success mb-2" role="alert" id="alert1">
+              <%= notice %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <% elsif flash[:alert].present? %>
+            <div class="alert alert-danger mb-2" role="alert" id="alert2">
+              <%= alert %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <% end %>
+          <%= yield  %>
+          <div class="container-fluid mx-auto w-55 p-3 text-center bg-light">
+            <div class="row">
+              <ul class="mx-auto w-55 p-3 text-center">
+                  Comité Organizador del Buen Fin Solidario
+              </ul>
+            </div>
+            <div class="row mx-auto text-center">
+              <div class="col-md text-center"><td><%= image_tag "ABAJO.png", style: "max-width: 100%;" %></td></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="row mx-auto text-center">
-        <div class="col-md text-center"><td><%= image_tag "ABAJO.png", style: "max-width: 100%;" %></td></div>
-      </div>  
     </div>
   </body>
 </html>
