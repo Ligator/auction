@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  has_many :bids
+  has_many :bids, dependent: :destroy
 
   ROUND_FACTOR = 10
 
