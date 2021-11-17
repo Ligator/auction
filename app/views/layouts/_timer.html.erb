@@ -1,0 +1,54 @@
+<section class="text">
+  <div class="container-fluid">
+    <div class="container">
+      <h1 id="stoped">Stop Watch</h1>
+    </div>
+  </div>
+  <div class="container">
+    <div id="timer" class="col-3">
+      <span id="cronometro">00:00:00:00</span> <button type="button" id="stopWatch" class="col-4">Start</button>     
+      <br>
+      <div id="times_result" class="result"></div>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+  var contador
+  var stopWatch
+  var stringTime
+
+  function secondsToString(contador){
+      d = Math.floor(contador/86400)
+      day = (d<10)? '0'+ d:d;
+      hh = Math.floor((contador / 3600)%24);
+      hour = (hh < 10)? '0' + hh : hh;
+      mm = Math.floor((contador / 60) % 60);
+      minute = (mm < 10)? '0' + mm : mm;
+      ss = contador % 60;
+      second = (ss < 10)? '0' + ss : ss;
+      return day + ":" + hour + ":" + minute + ":" + second  
+  };
+   
+  function updateDisplay(){
+    contador--;
+    stringTime = secondsToString(contador);
+    if (stringTime != "00:00:00:00") {
+      stringTime;
+    }else{
+      return stringTime = "00:00:00:00";
+       console.log(typeof(stringTime))
+
+    }
+    document.getElementById("cronometro").innerHTML = stringTime
+  };
+
+   document.getElementById("stopWatch").addEventListener("click", function(){
+    // clearInterval(stopWatch)
+    contador = 90
+    stopWatch = setInterval(updateDisplay,10)
+    updateDisplay();
+    
+  });
+
+</script>
