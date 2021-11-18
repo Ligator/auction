@@ -1,38 +1,46 @@
-<div class="row col-12 col-sm-6 col-md-6 col-lg-4 my-4 mx-auto">
-
-  <div class="col-3 col-md-2 col-sm-2 mx-auto">
-    <div class="row text-center">
-      <h1 id="cronometroDay"></h1>
+<div class="container-sm" id="finish">
+  <div class="row col-12 col-sm-12 col-md-8 col-lg-6 my-4 mx-auto">
+    
+    <div class="col-12 col-md-2 col-sm-2 col-lg-4 mx-auto">
+      <div class="row">
+        <div class="mx-auto" id="cronometroDay" style="font-size:3rem"></div>
+      </div>
+      <div class="row col-3 col-md-2 col-sm-2 col-lg-4 mx-auto">Dias</div>
     </div>
-    <div class="row col-12 text-center">Dias</div>
-  </div>
 
-  <div class="col-3 col-md-2 col-sm-2 mx-auto">
-    <div class="row text-center">
-       <h1 id="cronometroHh"></h1>
+  
+    <div class="col-1 col-md-2 col-sm-2 mx-auto">
+      <div class="">
+        <div class="row text-center" id="cronometroHh" style="font-size:3rem"></div>
+      </div>
+      <div class="row col-3 mx-auto">Hrs</div>
     </div>
-    <div class="row col-12 mx-auto">Hrs</div>
-  </div>
 
-  <div class="col-3 col-md-2 col-sm-2 mx-auto">
-    <div class="row text-center">
-      <h1 id="cronometroMm"></h1>
+    <div class="col-1 col-md-1 col-sm-1 mx-auto">
+      <div class="row col-1 text-center" style="font-size:3rem">:</div>
     </div>
-    <div class="row col-12 ">Min</div>
-  </div>
 
-  <div class="col-3 col-md-2 col-sm-2 mx-auto">
-    <div class="row text-center">
-      <h1 id="cronometroSs"></h1>
+    <div class="col-1 col-md-2 col-sm-2 mx-auto">
+      <div  id="cronometroMm" class="row text-center"  style="font-size:3rem">
+      </div>
+      <div class="row col-3 ">Min</div>
     </div>
-    <div class="row col-12 ">Seg</div>
+
+    <div class="col-1 col-md-1 col-sm-1 mx-auto">
+      <div class="row col-1 text-center" style="font-size:3rem">:</div>
+    </div>
+
+    <div class="col-1 col-md-2 col-sm-2 mx-auto">
+      <div id="cronometroSs" class="row text-center" style="font-size:3rem">
+      </div>
+      <div class="row col-3 ">Seg</div>
+    </div>
   </div>
 </div>
 
 <script type="text/javascript">
   var contador
   var stopWatch
-  var stringTime
 
   function secondsToString(contador){
     d = Math.floor(contador/86400)
@@ -43,25 +51,31 @@
     minute = (mm < 10)? '0' + mm : mm;
     ss = contador % 60;
     second = (ss < 10)? '0' + ss : ss;
-    return day + ":" + hour + ":" + minute + ":" + second;
+    return day +  hour + minute + second;
   };
    
   function updateDisplay(){
-    endTimer = new Date(2021,10,18,12)
+    endTimer = new Date(2021,10,18,16)
     startTimer = new Date()
     contador = Math.floor((endTimer.getTime()-startTimer.getTime())/1000)
     clearInterval(stopWatch)
     stopWatch = setInterval(updateDisplay,1000)
-    if (contador == 0) {
-      return "00:00:00:00"
-    }else{
+    if (contador > 0) {
       contador--;
+    }else{
+      clearInterval(stopWatch)
+      day = "00"
+      hour = "00" 
+      minute = "00" 
+      second = "00"
+      document.getElementById("finish").innerHTML = "La subasta ha terminado!!" 
+      return contador = 0
     };
-    stringTime = secondsToString(contador);
-    document.getElementById("cronometroDay").innerHTML = day  
-    document.getElementById("cronometroHh" ).innerHTML = "&nbsp&nbsp" + hour
-    document.getElementById("cronometroMm" ).innerHTML = ":" + minute 
-    document.getElementById("cronometroSs" ).innerHTML = ":" + second
+    secondsToString(contador);
+    document.getElementById("cronometroDay").innerHTML = day
+    document.getElementById("cronometroHh" ).innerHTML = hour
+    document.getElementById("cronometroMm" ).innerHTML = minute 
+    document.getElementById("cronometroSs" ).innerHTML =  second
   }; 
     
     updateDisplay();
