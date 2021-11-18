@@ -1,16 +1,21 @@
-<section class="text">
+<section>
   <div class="container-fluid">
-    <div class="container">
-      <h1 id="stoped">Stop Watch</h1>
+    <div class="row">
+      <div class="row col-5 mx-auto">
+        <h1 id="cronometroDay"></h1>
+        <h1 id="cronometroHh"></h1>
+        <h1 id="cronometroMm"></h1>
+        <h1 id="cronometroSs"></h1>
+      </div>
     </div>
-  </div>
-  <div class="container">
-    <div id="timer" class="col-3">
-      <span id="cronometro">00:00:00:00</span> <button type="button" id="stopWatch" class="col-4">Start</button>     
-      <br>
-      <div id="times_result" class="result"></div>
+
+    <div class="row col-5 mx-auto">
+      <h3 class="col-2 ">Día</h3>
+      <h3 class="col-2 ">Hrs</h3>
+      <h3 class="col-2 ">Min</h3>
+      <h3 class="col-2 ">Seg</h3>
     </div>
-  </div>
+  </div> 
 </section>
 
 <script type="text/javascript">
@@ -19,6 +24,7 @@
   var stringTime
 
   function secondsToString(contador){
+
       d = Math.floor(contador/86400)
       day = (d<10)? '0'+ d:d;
       hh = Math.floor((contador / 3600)%24);
@@ -27,28 +33,30 @@
       minute = (mm < 10)? '0' + mm : mm;
       ss = contador % 60;
       second = (ss < 10)? '0' + ss : ss;
-      return day + ":" + hour + ":" + minute + ":" + second  
+      return day + ":" + hour + ":" + minute + ":" + second;
   };
    
   function updateDisplay(){
-    contador--;
-    stringTime = secondsToString(contador);
-    if (stringTime != "00:00:00:00") {
-      stringTime;
+    endTimer = new Date(2021,10,18,12)
+    startTimer = new Date()
+    contador = Math.floor((endTimer.getTime()-startTimer.getTime())/1000)
+    clearInterval(stopWatch)
+    stopWatch = setInterval(updateDisplay,1000)
+    if (contador == 0) {
+      return "00:00:00:00"
     }else{
-      return stringTime = "00:00:00:00";
-       console.log(typeof(stringTime))
-
+      contador--;
     }
-    document.getElementById("cronometro").innerHTML = stringTime
-  };
+    stringTime = secondsToString(contador);
+    document.getElementById("cronometroDay").innerHTML = day + " &nbsp:&nbsp"
+    document.getElementById("cronometroHh" ).innerHTML = hour + " &nbsp:&nbsp"
+    document.getElementById("cronometroMm" ).innerHTML = minute + " &nbsp:&nbsp&nbsp "
+    document.getElementById("cronometroSs" ).innerHTML = second
 
-   document.getElementById("stopWatch").addEventListener("click", function(){
-    // clearInterval(stopWatch)
-    contador = 90
-    stopWatch = setInterval(updateDisplay,10)
-    updateDisplay();
+  }; 
     
-  });
+    updateDisplay();
 
 </script>
+
+
