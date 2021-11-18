@@ -71,10 +71,8 @@
     $.get( "bids/render_bids_row?product_ids_order=<%= @products.map(&:id).join('+') %>", function( data ) {
       $("#bids_products_row").html(data);
     });
+    setInterval(function(){
+      products_refresh()
+    }, 60000);
   }
-
-  setInterval(function(){
-    products_refresh()
-  }, 60000);
-
 </script>
