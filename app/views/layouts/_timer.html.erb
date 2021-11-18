@@ -1,19 +1,24 @@
 <section>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="row col-5 mx-auto">
+  <div class="row my-4 ">
+    <div class="col d-flex justify-content-center">
+      <div class="row col-12 col-md-7 col-lg-4">
         <h1 id="cronometroDay"></h1>
         <h1 id="cronometroHh"></h1>
         <h1 id="cronometroMm"></h1>
         <h1 id="cronometroSs"></h1>
       </div>
     </div>
-
-    <div class="row col-5 mx-auto">
-      <h3 class="col-2 ">Día</h3>
-      <h3 class="col-2 ">Hrs</h3>
-      <h3 class="col-2 ">Min</h3>
-      <h3 class="col-2 ">Seg</h3>
+  </div>
+  <div class="row my-1 ">
+    <div class="col d-flex justify-content-center">
+      <div class=" col-12 col-md-7 col-lg-4">
+        <div class="row">
+          <h3 class="col-2 ">Día</h3>
+          <h3 class="col-2 ">Hrs</h3>
+          <h3 class="col-2 ">Min</h3>
+          <h3 class="col-2 ">Seg</h3>
+        </div>
+      </div>
     </div>
   </div> 
 </section>
@@ -24,16 +29,15 @@
   var stringTime
 
   function secondsToString(contador){
-
-      d = Math.floor(contador/86400)
-      day = (d<10)? '0'+ d:d;
-      hh = Math.floor((contador / 3600)%24);
-      hour = (hh < 10)? '0' + hh : hh;
-      mm = Math.floor((contador / 60) % 60);
-      minute = (mm < 10)? '0' + mm : mm;
-      ss = contador % 60;
-      second = (ss < 10)? '0' + ss : ss;
-      return day + ":" + hour + ":" + minute + ":" + second;
+    d = Math.floor(contador/86400)
+    day = (d<10)? '0'+ d:d;
+    hh = Math.floor((contador / 3600)%24);
+    hour = (hh < 10)? '0' + hh : hh;
+    mm = Math.floor((contador / 60) % 60);
+    minute = (mm < 10)? '0' + mm : mm;
+    ss = contador % 60;
+    second = (ss < 10)? '0' + ss : ss;
+    return day + ":" + hour + ":" + minute + ":" + second;
   };
    
   function updateDisplay(){
@@ -46,17 +50,14 @@
       return "00:00:00:00"
     }else{
       contador--;
-    }
+    };
     stringTime = secondsToString(contador);
-    document.getElementById("cronometroDay").innerHTML = day + " &nbsp:&nbsp"
-    document.getElementById("cronometroHh" ).innerHTML = hour + " &nbsp:&nbsp"
-    document.getElementById("cronometroMm" ).innerHTML = minute + " &nbsp:&nbsp&nbsp "
+    document.getElementById("cronometroDay").innerHTML = day + "&nbsp&nbsp&nbsp"
+    document.getElementById("cronometroHh" ).innerHTML = hour + " :"
+    document.getElementById("cronometroMm" ).innerHTML = minute + " :"
     document.getElementById("cronometroSs" ).innerHTML = second
-
   }; 
     
     updateDisplay();
 
 </script>
-
-
