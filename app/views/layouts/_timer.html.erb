@@ -55,7 +55,7 @@
   };
    
   function updateDisplay(){
-    endTimer = new Date(2021,10,18,17)
+    endTimer = new Date(2021,10,18,17)  // (año_num,mes_num(los meses son del 0 al 10),dia_num[hora_num, min_num, segundo_num])
     startTimer = new Date()
     contador = Math.floor((endTimer.getTime()-startTimer.getTime())/1000)
     clearInterval(stopWatch)
