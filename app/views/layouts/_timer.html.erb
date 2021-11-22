@@ -1,11 +1,113 @@
-<div class="container text-center" id="finish" >
+<div class="row text-center">
+  <div class="col-12 col-md-12 col-lg-6 col-xl-6 my-4 mx-auto">
+
+    <div class="row">
+
+      <div class="col-12 col-sm-3 col-md-3">
+        <div class="row">
+
+          <div class="col-12">
+            <div class="row" >
+              <div class="col-12" id="cronometroDay" style="font-size:3rem"></div>
+            </div>
+            <div class="row">
+              <div class="col-12">Días</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-9 col-md-9">
+        <div class="row">
+
+          <div class="col-3">
+            <div class="row">
+              <div class="col-12"  id="cronometroHh" style="font-size:3rem"></div>
+              <div class="col-12 text-center">Hrs</div>
+            </div>
+          </div>
+
+          <div class="col-1" style="font-size:3rem">:</div>
+
+          <div class="col-3">
+            <div class="row" >
+              <div class="col-12" id="cronometroMm" style="font-size:3rem"></div>
+              <div class="col-12 text-center">Min</div>
+            </div>
+          </div>
+
+          <div class="col-1" style="font-size:3rem">:</div>
+          
+          <div class="col-3">
+            <div class="row">
+              <div class="col-12" id="cronometroSs" style="font-size:3rem"></div>
+              <dic class="col-12 text-center">Seg</dic>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var contador
+  var stopWatch
+
+  function secondsToString(contador){
+    d = Math.floor(contador/86400)
+    day = (d<10)? '0'+ d:d;
+    hh = Math.floor((contador / 3600)%24);
+    hour = (hh < 10)? '0' + hh : hh ;
+    mm = Math.floor((contador / 60) % 60);
+    minute = (mm < 10)? '0' + mm : mm;
+    ss = contador % 60;
+    second = (ss < 10)? '0' + ss : ss;
+    return day +  hour + minute + second;
+  };
+   
+  function updateDisplay(){
+    endTimer = new Date(2021,10,24)  // (año_num,mes_num(los meses son del 0 al 10),dia_num[hora_num, min_num, segundo_num])
+    startTimer = new Date()
+    contador = Math.floor((endTimer.getTime()-startTimer.getTime())/1000)
+    clearInterval(stopWatch)
+    stopWatch = setInterval(updateDisplay,1000)
+    if (contador > 0) {
+      contador--;
+    }else{
+      clearInterval(stopWatch)
+      day = "00"
+      hour = "00" 
+      minute = "00" 
+      second = "00"
+      document.getElementById("finish").innerHTML = "¡¡La subasta ha terminado!!" 
+      return contador = 0
+    };
+    secondsToString(contador);
+    document.getElementById("cronometroDay").innerHTML = day
+    document.getElementById("cronometroHh" ).innerHTML = hour
+    document.getElementById("cronometroMm" ).innerHTML = minute 
+    document.getElementById("cronometroSs" ).innerHTML =  second
+  }; 
+    
+    updateDisplay();
+
+</script>
+
+<!-- <div class="container text-center" id="finish" >
   <div class="row col-12 col-sm-12 col-md-8 col-lg-4 col-xl-4 my-4 mx-auto">
     
     <div class="col-12 col-md-3 col-sm-2 col-lg-3 mx-auto">
       <div class="row">
         <div class="mx-auto" id="cronometroDay" style="font-size:3rem"></div>
       </div>
-      <div class="row col-3 col-md-1 col-sm-2  mx-auto">Dias</div>
+      <div class="row">
+        <div class="col-3 col-md-1 col-sm-2 mx-auto">
+          <span class="mx-auto">Dias</span>
+        </div>
+      </div>
+      
     </div>
 
   
@@ -37,47 +139,30 @@
     </div>
   </div>
 </div>
+ -->
 
-<script type="text/javascript">
-  var contador
-  var stopWatch
 
-  function secondsToString(contador){
-    d = Math.floor(contador/86400)
-    day = (d<10)? '0'+ d:d;
-    hh = Math.floor((contador / 3600)%24);
-    hour = (hh < 10)? '0' + hh : hh ;
-    mm = Math.floor((contador / 60) % 60);
-    minute = (mm < 10)? '0' + mm : mm;
-    ss = contador % 60;
-    second = (ss < 10)? '0' + ss : ss;
-    return day +  hour + minute + second;
-  };
-   
-  function updateDisplay(){
-    endTimer = new Date(2021,10,18,17)  // (año_num,mes_num(los meses son del 0 al 10),dia_num[hora_num, min_num, segundo_num])
-    startTimer = new Date()
-    contador = Math.floor((endTimer.getTime()-startTimer.getTime())/1000)
-    clearInterval(stopWatch)
-    stopWatch = setInterval(updateDisplay,1000)
-    if (contador > 0) {
-      contador--;
-    }else{
-      clearInterval(stopWatch)
-      day = "00"
-      hour = "00" 
-      minute = "00" 
-      second = "00"
-      document.getElementById("finish").innerHTML = "La subasta ha terminado!!" 
-      return contador = 0
-    };
-    secondsToString(contador);
-    document.getElementById("cronometroDay").innerHTML = day
-    document.getElementById("cronometroHh" ).innerHTML = hour
-    document.getElementById("cronometroMm" ).innerHTML = minute 
-    document.getElementById("cronometroSs" ).innerHTML =  second
-  }; 
-    
-    updateDisplay();
 
-</script>
+
+          <!--  <div class="col-3 text-center">
+            <div class="row" ></div>
+            <div class="row ">Hrs</div>
+          </div>
+
+          <div class="col-1">
+            <div class="row" style="font-size:3rem">:</div>
+          </div>
+
+          <div class="col-3 text-center">
+            <div class="row " id="cronometroMm" style="font-size:3rem"></div>
+            <div class="row">Min</div>
+          </div>
+
+          <div class="col-1">
+            <div class="row" style="font-size:3rem">:</div>
+          </div>
+
+          <div class="col-3 text-center">
+            <div class="row" id="cronometroSs" style="font-size:3rem"></div>
+            <div class="row ">Seg</div>
+          </div> -->
